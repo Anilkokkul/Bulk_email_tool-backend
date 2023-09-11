@@ -12,9 +12,18 @@ exports.register = async (req, res) => {
     const payload = req.body;
 
     const user = await Users.findOne({ email: payload.email });
-    console.log(user);
+
     if (user) {
-      return res.status(400).send({
+      return res.status(409).send({
+        message: "An account is already registered with your mobile number",
+      });
+    }
+    const userWithMobile = await Users.findOne({
+      mobileNumber: payload.mobileNumber,
+    });
+
+    if (userWithMobile) {
+      return res.status(409).send({
         message: "An account is already registered with your email",
       });
     }
