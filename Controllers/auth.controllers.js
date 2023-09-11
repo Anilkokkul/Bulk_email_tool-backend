@@ -11,9 +11,11 @@ exports.register = async (req, res) => {
   try {
     const payload = req.body;
 
-    if (!payload.password) {
-      res.status(400).send({
-        message: "Password is required",
+    const user = await Users.findOne({ email: payload.email });
+    console.log(user);
+    if (user) {
+      return res.status(400).send({
+        message: "An account is already registered with your email",
       });
     }
 
@@ -34,7 +36,7 @@ exports.register = async (req, res) => {
       .catch((error) => {
         res.status(400).send({
           message: "Error occured while creating the user",
-          error: error,
+          error: error.message,
         });
       });
 
@@ -42,7 +44,7 @@ exports.register = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       message: "Internal Server error",
-      error: error,
+      error: error.message,
     });
   }
 };
