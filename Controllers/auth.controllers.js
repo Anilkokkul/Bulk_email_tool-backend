@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
 
     if (user) {
       return res.status(409).send({
-        message: "An account is already registered with your mobile number",
+        message: "An account is already registered with your email",
       });
     }
     const userWithMobile = await Users.findOne({
@@ -24,7 +24,7 @@ exports.register = async (req, res) => {
 
     if (userWithMobile) {
       return res.status(409).send({
-        message: "An account is already registered with your email",
+        message: "An account is already registered with your mobile number",
       });
     }
 
