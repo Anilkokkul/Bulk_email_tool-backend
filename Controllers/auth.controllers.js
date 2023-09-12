@@ -111,6 +111,12 @@ exports.forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
 
+    if (!email) {
+      return res.status(400).send({
+        message: "Please enter email !!!",
+      });
+    }
+
     const user = await Users.findOne({ email: email });
 
     if (!user) {
@@ -134,9 +140,11 @@ exports.forgotPassword = async (req, res) => {
 
     const link = `http://localhost:3000/reset-password/?token=${newToken}&userId=${user._id}`;
 
-    const isResetLinkSent = await sendResetLink(user.email, "RESET PASSWORD", {
-      Reset_Password_Link: link,
-    });
+    const isResetLinkSent = await sendResetLink(
+      user.email,
+      "Password reset Request",
+      link
+    );
 
     if (isResetLinkSent) {
       res
