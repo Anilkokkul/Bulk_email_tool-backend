@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
           process.env.SECRET_KEY
         );
         res.cookie("accessToken", token, {
-          httpOnly: true,
+          httpOnly: false,
           secure: false,
           expires: new Date(Date.now() + 86400000),
         });
