@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
         );
         res.cookie("accessToken", token, {
           httpOnly: false,
-          secure: false,
+          secure: true,
           expires: new Date(Date.now() + 86400000),
         });
         return res.status(200).send({
