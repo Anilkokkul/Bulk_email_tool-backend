@@ -8,13 +8,20 @@ const templateRoutes = require("./Routes/templates.route");
 const bulkEmailRoute = require("./Routes/bulk_email_route");
 const cookieParser = require("cookie-parser");
 db();
-// const corsOptions = {
-//   origin: "https://master--endearing-sable-5f4b83.netlify.app",
-//   credentials: true,
-//   // optionSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
-app.use(cors());
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "https://master--endearing-sable-5f4b83.netlify.app",
+  ],
+  credentials: true,
+  methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Access-Control-Allow-Origin",
+    "Content-Type",
+    "Authorization",
+  ],
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(userRoutes);
