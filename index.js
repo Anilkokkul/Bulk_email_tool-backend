@@ -9,7 +9,7 @@ const bulkEmailRoute = require("./Routes/bulk_email_route");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://master--endearing-sable-5f4b83.netlify.app",
   credentials: true,
   optionSuccessStatus: 200,
 };
