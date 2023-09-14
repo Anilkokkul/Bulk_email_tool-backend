@@ -14,12 +14,6 @@ const corsOptions = {
     "https://master--endearing-sable-5f4b83.netlify.app",
   ],
   credentials: true,
-  methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Access-Control-Allow-Origin",
-    "Content-Type",
-    "Authorization",
-  ],
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
