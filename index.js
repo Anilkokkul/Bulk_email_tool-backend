@@ -8,7 +8,12 @@ const templateRoutes = require("./Routes/templates.route");
 const bulkEmailRoute = require("./Routes/bulk_email_route");
 const cookieParser = require("cookie-parser");
 db();
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(userRoutes);

@@ -11,7 +11,7 @@ const sendBulk = async (emails, subject, content) => {
     });
 
     const mailOptions = {
-      from: "anilkokkul8076@gmail.com",
+      from: '"MailMegaPro"<anilkokkul8076@gmail.com>',
       to: emails,
       subject: subject,
       text: content,
