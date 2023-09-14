@@ -71,9 +71,10 @@ exports.login = async (req, res) => {
           process.env.SECRET_KEY
         );
         res.cookie("accessToken", token, {
-          httpOnly: true,
+          httpOnly: false,
           secure: true,
           sameSite: "none",
+          domaine: ".netlify.app",
           expires: new Date(Date.now() + 86400000),
         });
         return res.status(200).send({
