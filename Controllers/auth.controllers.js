@@ -141,7 +141,7 @@ exports.forgotPassword = async (req, res) => {
 
     await tokenPayload.save();
 
-    const link = `http://localhost:3000/reset-password/?token=${newToken}&userId=${user._id}`;
+    const link = `https://master--endearing-sable-5f4b83.netlify.app/reset-password/?token=${newToken}&userId=${user._id}`;
 
     const isResetLinkSent = await sendResetLink(
       user.email,
