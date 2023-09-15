@@ -73,7 +73,7 @@ exports.login = async (req, res) => {
         res.cookie("accessToken", token, {
           httpOnly: true,
           secure: true,
-          domain: ".netlify.app",
+          sameSite: "none",
           expires: new Date(Date.now() + 86400000),
         });
         return res.status(200).send({

@@ -11,9 +11,12 @@ db();
 const corsOptions = {
   origin: [
     "http://localhost:3000",
+    "http://localhost:3001",
     "https://master--endearing-sable-5f4b83.netlify.app",
+    "https://650401dc936e1c656e69c162--lambent-begonia-090e36.netlify.app",
   ],
   credentials: true,
+  methods: ["GET", "POST", "DELETE"],
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
