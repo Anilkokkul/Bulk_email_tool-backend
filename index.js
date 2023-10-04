@@ -30,10 +30,6 @@ port = process.env.PORT || 8001;
 app.get("/", (req, res) => {
   res.status(200).send("API is running");
 });
-app.get("/set-cookie", (req, res) => {
-  res.cookie("foo", "bar");
-  res.send("cookis is set");
-});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
