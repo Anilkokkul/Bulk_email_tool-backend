@@ -10,7 +10,7 @@ const mailingListRoutes = require("./Routes/mailing_list.routes");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
-  origin: "*",
+  origin: "https://endearing-sable-5f4b83.netlify.app",
   credentials: true,
   // methods: ["GET", "POST", "DELETE", "PUT"],
 };
