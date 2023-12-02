@@ -10,9 +10,14 @@ const mailingListRoutes = require("./Routes/mailing_list.routes");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
-  origin: "https://endearing-sable-5f4b83.netlify.app",
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://master--endearing-sable-5f4b83.netlify.app",
+    "https://650401dc936e1c656e69c162--lambent-begonia-090e36.netlify.app",
+  ],
   credentials: true,
-  // methods: ["GET", "POST", "DELETE", "PUT"],
+  methods: ["GET", "POST", "DELETE", "PUT"],
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());

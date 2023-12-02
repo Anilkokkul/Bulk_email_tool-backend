@@ -14,7 +14,7 @@ const sendBulk = async (emails, subject, content) => {
       from: '"MailMegaPro"<anilkokkul8076@gmail.com>',
       to: emails,
       subject: subject,
-      text: content,
+      html: content,
     };
 
     await transporter.sendMail(mailOptions);
