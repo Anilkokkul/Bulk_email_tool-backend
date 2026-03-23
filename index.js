@@ -10,7 +10,7 @@ const mailingListRoutes = require("./Routes/mailing_list.routes");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
-  origin: process.env.ALLOWEDORIGINS,
+  origin: process.env.ALLOWED_ORIGINS.split(','),
   credentials: true,
   methods: ["GET", "POST", "DELETE", "PUT"],
 };
