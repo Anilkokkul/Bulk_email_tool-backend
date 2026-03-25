@@ -11,7 +11,7 @@ const historyRoutes = require("./Routes/history.routes");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
-  origin: process.env.ALLOWED_ORIGINS?.split(','),
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || "*",
   credentials: true,
   methods: ["GET", "POST", "DELETE", "PUT"],
 };
