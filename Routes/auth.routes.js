@@ -5,7 +5,9 @@ const {
   logout,
   forgotPassword,
   resetPassword,
+  getUser
 } = require("../Controllers/auth.controllers");
+const { isAuth } = require("../utils/authentication");
 
 const router = express.Router();
 
@@ -14,6 +16,9 @@ router.post("/register", register);
 
 //login user
 router.post("/login", login);
+
+//get User
+router.get("/user",isAuth, getUser);
 
 //logout user
 router.get("/logout", logout);

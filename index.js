@@ -7,10 +7,11 @@ const userRoutes = require("./Routes/auth.routes");
 const templateRoutes = require("./Routes/templates.route");
 const bulkEmailRoute = require("./Routes/bulk_email_route");
 const mailingListRoutes = require("./Routes/mailing_list.routes");
+const historyRoutes = require("./Routes/history.routes");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
-  origin: process.env.ALLOWED_ORIGINS.split(','),
+  origin: process.env.ALLOWED_ORIGINS?.split(','),
   credentials: true,
   methods: ["GET", "POST", "DELETE", "PUT"],
 };
@@ -21,6 +22,7 @@ app.use(userRoutes);
 app.use(templateRoutes);
 app.use(bulkEmailRoute);
 app.use(mailingListRoutes);
+app.use("/api", historyRoutes);
 
 port = process.env.PORT || 8001;
 app.get("/", (req, res) => {

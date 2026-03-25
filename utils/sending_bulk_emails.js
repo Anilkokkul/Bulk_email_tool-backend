@@ -17,11 +17,11 @@ const sendBulk = async (emails, subject, content) => {
       html: content,
     };
 
-    await transporter.sendMail(mailOptions);
-    return true;
+    const info = await transporter.sendMail(mailOptions);
+    return { success: true, info };
   } catch (error) {
     console.log("Error while sending mail. Internal server error", error);
-    return false;
+    return { success: false, error };
   }
 };
 

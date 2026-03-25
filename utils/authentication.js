@@ -11,6 +11,7 @@ exports.isAuth = (req, res, next) => {
         message: "Not Authenticated please login",
       });
     }
+    req.user = obj;
     return next();
   }
   res.status(401).send({

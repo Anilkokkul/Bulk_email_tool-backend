@@ -96,6 +96,21 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.getUser = async (req, res) => {
+  try {
+    const user = await Users.findById(req.user._id);
+    res.status(200).send({
+      message: "User fetched successfully",
+      user: user,
+    });
+  } catch (error) {
+    res.status(500).send({
+      message: "Internal Server error",
+      error: error.message,
+    });
+  }
+};
+
 exports.logout = async (req, res) => {
   try {
     await res.clearCookie("accessToken");
