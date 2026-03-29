@@ -27,7 +27,59 @@ app.use("/api", historyRoutes);
 
 port = process.env.PORT || 8001;
 app.get("/", (req, res) => {
-  res.status(200).send("API is running");
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Bulk Email Tool API</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+          }
+          .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+          h1 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+          }
+          p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin: 0;
+          }
+          .status {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #dcfce7;
+            color: #166534;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.9rem;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>Bulk Email Tool API</h1>
+          <p>The backend service is up and running.</p>
+          <div class="status">● System Online</div>
+        </div>
+      </body>
+    </html>
+  `);
 });
 
 app.listen(port, () => {
