@@ -23,9 +23,9 @@ exports.handleResendWebhook = async (req, res) => {
       // Extract precise error reason so the UI can show exactly why it failed
       let errorRemark = payload.type;
       if (emailData.bounce && emailData.bounce.error) {
-        errorRemark = emailData.bounce.error;
+        errorRemark = `Delivery Failed: The email address ${bouncedAddress} could not be reached. Reason: ${emailData.bounce.error}`;
       } else if (emailData.suppressed && emailData.suppressed.message) {
-        errorRemark = emailData.suppressed.message;
+        errorRemark = `Delivery Skipped: The email address ${bouncedAddress} is unable to receive emails because it had previously bounced or complained.`;
       }
       
       // Keep a precise ledger of which email failed
