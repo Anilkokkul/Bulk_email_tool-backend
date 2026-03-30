@@ -1,5 +1,6 @@
 const sendBulk = require("../utils/sending_bulk_emails");
 const History = require("../models/history.model");
+const mongoose = require("mongoose");
 
 exports.sendBulkEmails = async (req, res) => {
   try {
@@ -11,7 +12,10 @@ exports.sendBulkEmails = async (req, res) => {
       });
     }
 
-    const result = await sendBulk(recipients, subject, template);
+    // Pre-generate the History ID so we can tag the emails sent via Resend
+    const historyId = new mongoose.Types.ObjectId();
+
+    const result = await sendBulk(recipients, subject, template, historyId);
     
     if (result.success) {
       const acceptedCount = result.info.accepted ? result.info.accepted.length : 0;
@@ -23,6 +27,7 @@ exports.sendBulkEmails = async (req, res) => {
       else if (rejectedCount > 0) status = "Partial";
 
       await History.create({
+        _id: historyId,
         user: req.user._id,
         subject,
         recipientsCount,
@@ -34,6 +39,7 @@ exports.sendBulkEmails = async (req, res) => {
       res.status(201).send({ message: "Email sent successfully" });
     } else {
       await History.create({
+        _id: historyId,
         user: req.user._id,
         subject,
         recipientsCount: recipients.length,
@@ -44,7 +50,7 @@ exports.sendBulkEmails = async (req, res) => {
 
       res
         .status(403)
-        .send({ message: "Error sending email: internal server error" });
+        .send({ message: "Error sending email: " + (result.message || "internal server error") });
     }
   } catch (error) {
     res.status(500).send({

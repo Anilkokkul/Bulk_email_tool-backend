@@ -8,6 +8,7 @@ const templateRoutes = require("./Routes/templates.route");
 const bulkEmailRoute = require("./Routes/bulk_email_route");
 const mailingListRoutes = require("./Routes/mailing_list.routes");
 const historyRoutes = require("./Routes/history.routes");
+const webhookRoutes = require("./Routes/webhook.routes");
 const cookieParser = require("cookie-parser");
 db();
 const corsOptions = {
@@ -24,6 +25,7 @@ app.use(templateRoutes);
 app.use(bulkEmailRoute);
 app.use(mailingListRoutes);
 app.use("/api", historyRoutes);
+app.use("/api/webhooks", webhookRoutes);
 
 port = process.env.PORT || 8001;
 app.get("/", (req, res) => {

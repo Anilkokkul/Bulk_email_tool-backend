@@ -1,4 +1,6 @@
 const History = require("../models/history.model");
+const mongoose = require("mongoose");
+const Mailing_Lists = require("../models/mailingList.model");
 
 exports.getHistory = async (req, res) => {
   try {
@@ -11,12 +13,13 @@ exports.getHistory = async (req, res) => {
 
 exports.getStats = async (req, res) => {
   try {
+    const totalCampaigns = await Mailing_Lists.countDocuments();
+
     const stats = await History.aggregate([
-      { $match: { user: req.user._id } },
+      { $match: { user: new mongoose.Types.ObjectId(req.user._id) } },
       {
         $group: {
           _id: null,
-          totalCampaigns: { $sum: 1 },
           totalEmailsSent: { $sum: "$recipientsCount" },
           totalAccepted: { $sum: "$acceptedCount" },
           totalRejected: { $sum: "$rejectedCount" }
@@ -25,10 +28,12 @@ exports.getStats = async (req, res) => {
     ]);
     
     if (stats.length > 0) {
-      res.status(200).send(stats[0]);
+      const responseData = stats[0];
+      responseData.totalCampaigns = totalCampaigns;
+      res.status(200).send(responseData);
     } else {
       res.status(200).send({
-        totalCampaigns: 0,
+        totalCampaigns,
         totalEmailsSent: 0,
         totalAccepted: 0,
         totalRejected: 0
