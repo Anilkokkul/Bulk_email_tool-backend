@@ -91,7 +91,7 @@ exports.login = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       message: "Internal Server error",
-      error: error.,
+      error: { message: error.message, name: error.name, stack: error.stack, ...error }
     });
   }
 };
