@@ -20,10 +20,18 @@ exports.handleResendWebhook = async (req, res) => {
         });
       }
       
+      // Extract precise error reason so the UI can show exactly why it failed
+      let errorRemark = payload.type;
+      if (emailData.bounce && emailData.bounce.error) {
+        errorRemark = emailData.bounce.error;
+      } else if (emailData.suppressed && emailData.suppressed.message) {
+        errorRemark = emailData.suppressed.message;
+      }
+      
       // Keep a precise ledger of which email failed
       await BouncedEmail.create({
         email: bouncedAddress,
-        reason: emailData.bounce ? emailData.bounce.error : payload.type,
+        reason: errorRemark,
         campaignId: campaignId
       });
       
